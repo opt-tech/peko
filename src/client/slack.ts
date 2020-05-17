@@ -1,13 +1,13 @@
 import {
-  ChatDeleteArguments,
-  ChatPostEphemeralArguments,
+  WebClient,
   ChatPostMessageArguments,
+  ChatDeleteArguments,
+  WebAPICallResult,
+  ChatPostEphemeralArguments,
   ChatUpdateArguments,
   ViewsOpenArguments,
   ViewsPublishArguments,
-  WebAPICallResult,
-  WebClient,
-} from '../function/poyo/send-survey/node_modules/@slack/web-api'
+} from '@slack/web-api'
 
 export class SlackClient {
   private web: WebClient
@@ -29,7 +29,7 @@ export class SlackClient {
   }
 
   deleteMessage(options: ChatDeleteArguments): Promise<WebAPICallResult | void> {
-    return this.web.chat.delete(options).catch((e) => {
+    return this.web.chat.delete(options).catch(e => {
       if (e.message === 'An API error occurred: message_not_found') {
         console.log('message_not_found を通過')
         return

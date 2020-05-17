@@ -50,16 +50,9 @@ provider:
 #           ReadCapacityUnits: 10
 #           WriteCapacityUnits: 10
 
-# functions:
-#   send-survey:
-#     handler: handler.sendSurvey
-#     events:
-#       - http:
-#           method: post
-#           path: send-survey
-#   execute-interactive-component:
-#     handler: handler.interactiveComponent
-#     events:
-#       - http:
-#           path: execute-interactive-component
-#           method: post
+functions:
+  greet:
+    handler: handler.greet
+    events:
+      # UTC
+      - schedule: cron(0 0 ? * MON-FRI *)
