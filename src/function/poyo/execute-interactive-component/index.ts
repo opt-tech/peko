@@ -3,9 +3,8 @@ import { parse } from 'querystring'
 
 import { InteractiveComponentRequest, Payload } from '../../../ common/slack-types'
 import { Response } from '../../../ common/types'
-import { getVariable, okResponse } from '../../../ common/util'
+import { getVariable, okResponse, getActionFromBlockActions } from '../../../ common/util'
 import { SlackClient } from '../../../client/slack'
-import { getActionFromBlockActions } from './util'
 
 const slackClient = new SlackClient()
 

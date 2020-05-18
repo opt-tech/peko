@@ -1,4 +1,3 @@
-import { APIGatewayProxyEvent, Context, Callback } from 'aws-lambda'
 import { getVariables, okResponse } from '../../ common/util'
 import { SlackClient } from '../../client/slack'
 import { Response } from '../../ common/types'

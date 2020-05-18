@@ -30,29 +30,41 @@ provider:
         - "dynamodb:*"
       Resource:
         - "arn:aws:dynamodb:*:*:table/${self:service:name}-${env:STAGE}-*"
-# resources:
-#   Resources:
-#     answer:
-#       Type: AWS::DynamoDB::Table
-#       Properties:
-#         TableName: "${self:service:name}-${env:STAGE}-answer"
-#         AttributeDefinitions:
-#           - AttributeName: user
-#             AttributeType: S
-#           - AttributeName: survey_id
-#             AttributeType: N
-#         KeySchema:
-#           - AttributeName: user
-#             KeyType: HASH
-#           - AttributeName: survey_id
-#             KeyType: RANGE
-#         ProvisionedThroughput:
-#           ReadCapacityUnits: 10
-#           WriteCapacityUnits: 10
+
+resources:
+  Resources:
+    answer:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: "${self:service:name}-${env:STAGE}-user-answer"
+        AttributeDefinitions:
+          - AttributeName: user_id
+            AttributeType: S
+          - AttributeName: ts
+            AttributeType: S
+        KeySchema:
+          - AttributeName: user_id
+            KeyType: HASH
+          - AttributeName: ts
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
 
 functions:
-  greet:
-    handler: handler.greet
+  # greet:
+  #   handler: handler.greet
+  #   events:
+  #     # UTC
+  #     - schedule: cron(0 0 ? * MON-FRI *)
+  quiz-deliver:
+    handler: handler.quizDeliver
     events:
       # UTC
       - schedule: cron(0 0 ? * MON-FRI *)
+  quiz-execute-interactive-component:
+    handler: handler.quizInteractiveComponent
+    events:
+      - http:
+          method: post
+          path: quiz-execute-interactive-component

@@ -1,5 +1,5 @@
-import { Block, KnownBlock, View } from '../function/poyo/send-survey/node_modules/@slack/web-api'
-import { ParsedUrlQuery } from '../function/poyo/send-survey/node_modules/querystring'
+import { ParsedUrlQuery } from 'querystring'
+import { View, Block, KnownBlock } from '@slack/web-api'
 
 export type RequestBody =
   | MessageRequest
